@@ -2,12 +2,12 @@ public class TransformerModel : Model {
     static let shared_vocabulary_file = "shared_vocabulary.txt";
     static let source_vocabulary_file = "source_vocabulary.txt";
     static let target_vocabulary_file = "target_vocabulary.txt";
-    // static let vmap_file = "vmap.txt";
+    static let vmap_file = "vmap.txt";
 
     // var _source_vocabulary: Vocabulary
     // var _target_vocabulary: Vocabulary
     var _shared_vocabulary: Vocabulary = Vocabulary()
-    // var _vocabulary_map: VocabularyMap
+    var _vocabulary_map: VocabularyMap = VocabularyMap()
 
     // TODO: spec:TransformerSpecの場合、_num_headsは、0でよい?
     var _num_heads = 0
@@ -18,9 +18,9 @@ public class TransformerModel : Model {
             self._shared_vocabulary = Vocabulary(fin: shared_vocabulary)
         }
         // TODO:_source_vocabulary/_target_vocabulary
-        // if let vmap = model_reader.get_file(filename: Self.vmap_file) {
-        //   self._vocabulary_map = VocabularyMap(vmap, self._shared_vocabulary)
-        // }
+        if let vmap = model_reader.get_file(filename: Self.vmap_file) {
+          self._vocabulary_map = VocabularyMap(map_file: vmap, vocabulary: self._shared_vocabulary)
+        }
     }
 
     func num_heads() -> Int {
