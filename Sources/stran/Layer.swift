@@ -58,6 +58,30 @@ public class Dense : Layer {
         self._weight = model.get_variable(name: scope + "/weight")!
         self._bias = model.get_variable(name: scope + "/bias")!
     }
+
+    // TODO Gather
+    // void Dense::mask_weights(const StorageView& index) {
+    //   if (_packed_weight)
+    //     throw std::runtime_error("Can't mask pre-packed weight");
+    //   ops::Gather()(_weight, index, _partial_weight);
+    //   if (_u8_shift_compensation)
+    //     ops::Gather()(*_u8_shift_compensation, index, _partial_u8_shift_compensation);
+    //   if (_bias)
+    //     ops::Gather()(*_bias, index, _partial_bias);
+    //   if (_qscale && !_qscale->is_scalar())
+    //     ops::Gather()(*_qscale, index, _partial_qscale);
+    // }
+
+    // void Dense::reset_mask() {
+    //   _partial_weight.clear();
+    //   _partial_bias.clear();
+    //   _partial_qscale.clear();
+    //   _partial_u8_shift_compensation.clear();
+    // }
+    func reset_mask() {
+
+    }
+
 }
 
 public class LayerNorm : Layer {
